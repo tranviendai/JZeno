@@ -64093,15 +64093,15 @@ A.Fm.prototype={}
 A.Fl.prototype={}
 A.DU.prototype={}
 A.Ct.prototype={
-T(a){var s=this,r=null,q=A.af4(r,"Lora",r),p=A.cl([B.bd,B.by,B.eh,B.ei],t.C),o=A.a([A.BZ(B.i,B.zH,new A.V6(s),r,r),B.i_,A.BZ(B.i,B.zF,new A.V7(s),r,r),B.i_,A.BZ(B.i,B.zI,new A.V8(s),r,r),B.i_,A.BZ(B.i,B.zG,new A.V9(s),r,r)],t.E)
+T(a){var s=this,r=null,q=A.af4(r,"Lora",r),p=A.cl([B.bd,B.by,B.eh,B.ei],t.C),o=A.a([A.BZ(B.i,B.zI,new A.V6(s),r,r),B.i_,A.BZ(B.i,B.zF,new A.V7(s),r,r),B.i_,A.BZ(B.i,B.zG,new A.V8(s),r,r),B.i_,A.BZ(B.i,B.zH,new A.V9(s),r,r)],t.E)
 return new A.tl(new A.uB(new A.qf(B.LA,o,B.cJ,!0,new A.KB(r,r,1/0,56),r),B.zV,r),q,!1,new A.a6M(B.x9,!0,!0,r,r,p,r),r)},
-rU(){var s=0,r=A.V(t.H)
-var $async$rU=A.W(function(a,b){if(a===1)return A.S(b,r)
+rV(){var s=0,r=A.V(t.H)
+var $async$rV=A.W(function(a,b){if(a===1)return A.S(b,r)
 while(true)switch(s){case 0:s=2
-return A.a_(A.pY(A.eH("https://github.com/tranviendai/",0,null)),$async$rU)
+return A.a_(A.pY(A.eH("https://www.linkedin.com/in/tranviendai/",0,null)),$async$rV)
 case 2:if(!b)throw A.d(A.bP("Could not launch"))
 return A.T(null,r)}})
-return A.U($async$rU,r)},
+return A.U($async$rV,r)},
 rT(){var s=0,r=A.V(t.H)
 var $async$rT=A.W(function(a,b){if(a===1)return A.S(b,r)
 while(true)switch(s){case 0:s=2
@@ -64109,13 +64109,13 @@ return A.a_(A.pY(A.eH("https://www.facebook.com/TVD.JZeno/",0,null)),$async$rT)
 case 2:if(!b)throw A.d(A.bP("Could not launch"))
 return A.T(null,r)}})
 return A.U($async$rT,r)},
-rV(){var s=0,r=A.V(t.H)
-var $async$rV=A.W(function(a,b){if(a===1)return A.S(b,r)
+rU(){var s=0,r=A.V(t.H)
+var $async$rU=A.W(function(a,b){if(a===1)return A.S(b,r)
 while(true)switch(s){case 0:s=2
-return A.a_(A.pY(A.eH("https://www.instagram.com/_tvd.jz/",0,null)),$async$rV)
+return A.a_(A.pY(A.eH("https://github.com/tranviendai/",0,null)),$async$rU)
 case 2:if(!b)throw A.d(A.bP("Could not launch"))
 return A.T(null,r)}})
-return A.U($async$rV,r)},
+return A.U($async$rU,r)},
 rW(){var s=0,r=A.V(t.H)
 var $async$rW=A.W(function(a,b){if(a===1)return A.S(b,r)
 while(true)switch(s){case 0:s=2
@@ -64124,13 +64124,13 @@ case 2:if(!b)throw A.d(A.bP("Could not launch"))
 return A.T(null,r)}})
 return A.U($async$rW,r)}}
 A.V6.prototype={
-$0(){return this.a.rU()},
+$0(){return this.a.rV()},
 $S:0}
 A.V7.prototype={
 $0(){return this.a.rT()},
 $S:0}
 A.V8.prototype={
-$0(){return this.a.rV()},
+$0(){return this.a.rU()},
 $S:0}
 A.V9.prototype={
 $0(){return this.a.rW()},
@@ -66951,13 +66951,13 @@ B.zD=new A.rf(1,"enabled")
 B.dz=new A.rf(2,"disabled")
 B.Oa=new A.ns(0)
 B.zE=new A.rn(null,null,null,null,null,null,null,null,null,null,null)
-B.zY=new A.rM(61594,"FontAwesomeBrands","font_awesome_flutter",!1)
-B.zF=new A.lh(B.zY,null)
+B.zZ=new A.rM(61594,"FontAwesomeBrands","font_awesome_flutter",!1)
+B.zF=new A.lh(B.zZ,null)
+B.zY=new A.rM(61907,"FontAwesomeBrands","font_awesome_flutter",!1)
+B.zG=new A.lh(B.zY,null)
 B.A_=new A.TQ(61589,"FontAwesomeSolid","font_awesome_flutter",!1)
-B.zG=new A.lh(B.A_,null)
-B.zZ=new A.rM(61595,"FontAwesomeBrands","font_awesome_flutter",!1)
-B.zH=new A.lh(B.zZ,null)
-B.zX=new A.rM(61805,"FontAwesomeBrands","font_awesome_flutter",!1)
+B.zH=new A.lh(B.A_,null)
+B.zX=new A.rM(61665,"FontAwesomeBrands","font_awesome_flutter",!1)
 B.zI=new A.lh(B.zX,null)
 B.zJ=new A.rs(null)
 B.fI=new A.li(0,"none")
