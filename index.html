@@ -1,38 +1,146 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/JZeno/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Portfolio website of Tran Viendai, a Flutter developer. Explore my projects, skills, and contact information.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="tranviendai">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>tranviendai</title>
-  <link rel="manifest" href="manifest.json">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tran Vien Dai (JZeno), an AI engineer from Vietnam. Work history, education, and personal projects.">
+  <title>Tran Vien Dai · JZeno</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <svg class="icon-definitions" width="0" height="0" aria-hidden="true"><defs><symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18m-11 0v2h4v-2"/></symbol><symbol id="icon-education" viewBox="0 0 24 24"><path d="m2 10 10-5 10 5-10 5-10-5Zm5 3v4c3 3 7 3 10 0v-4m5-3v6"/></symbol><symbol id="icon-project" viewBox="0 0 24 24"><path d="m12 3 9 5v8l-9 5-9-5V8l9-5ZM3 8l9 5 9-5m-9 5v8"/></symbol><symbol id="icon-contact" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm2 6h10m-10 4h6"/></symbol><symbol id="icon-spark" viewBox="0 0 24 24"><path d="M12 2c0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10 6 0 10-4 10-10Z"/></symbol><symbol id="icon-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/></symbol><symbol id="icon-brain" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4M9 12h6m-3-3v6"/></symbol><symbol id="icon-web" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol></defs></svg>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="shell site-header">
+    <a class="brand" href="#top"><img src="./favicon.svg" width="38" height="38" alt="">JZENO<span>.</span></a>
+    <nav id="main-navigation" aria-label="Main navigation">
+      <a href="#about"><span class="icon-tile icon-orange" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-briefcase"/></svg></span><span class="nav-label">Experience</span></a>
+      <a href="#projects"><span class="icon-tile icon-green" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-project"/></svg></span><span class="nav-label">Projects</span></a>
+      <a href="#contact"><span class="icon-tile icon-pink" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-contact"/></svg></span><span class="nav-label">Contact</span></a>
+    </nav>
+    <div class="nav-controls">
+      <button id="language" class="language-trigger" type="button" aria-haspopup="dialog" aria-controls="language-dialog">
+        <span class="language-flag" aria-hidden="true">🌐</span><span class="language-current">Auto</span><svg class="language-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+  <dialog id="language-dialog" aria-labelledby="language-title">
+    <div class="language-panel">
+      <div class="language-panel-header">
+        <h2 id="language-title">Language</h2>
+        <form method="dialog"><button class="language-close" type="submit" aria-label="Close" autofocus>×</button></form>
+      </div>
+      <div class="language-grid"></div>
+    </div>
+  </dialog>
+  <main id="top">
+    <div class="hero-band">
+      <section class="shell hero" aria-labelledby="name">
+        <div class="hero-copy">
+          <p class="label">AI ENGINEER <span>·</span> VIETNAM</p>
+          <h1 id="name">Tran Vien Dai</h1>
+          <p class="intro">I build with AI for a living. My models get trained. My coffee habit is still unsupervised.</p>
+          <a class="button primary" href="#about">View experience</a>
+        </div>
+        <div class="portrait-stage">
+          <div class="portrait-scene">
+            <div class="portrait-tilt">
+              <div class="portrait-orbit portrait-orbit--outer" aria-hidden="true"></div>
+              <div class="portrait-orbit portrait-orbit--inner" aria-hidden="true"></div>
+              <div class="portrait-halo" aria-hidden="true"></div>
+              <div class="portrait-frame">
+                <img src="./avatar.webp" width="760" height="760" alt="Tran Vien Dai" fetchpriority="high">
+              </div>
+              <span class="icon-tile icon-blue portrait-float portrait-float--chip" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-brain"/></svg></span>
+              <span class="icon-tile icon-orange portrait-float portrait-float--spark" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-spark"/></svg></span>
+              <span class="icon-tile icon-green portrait-float portrait-float--code" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-code"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section id="about" class="shell about section">
+      <h2><span class="icon-tile icon-orange " aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-briefcase"/></svg></span><span class="heading-text">Work experience</span></h2>
+      <ol class="timeline">
+        <li>
+          <p class="date"><time datetime="2024-04">Apr 2024</time> – <time datetime="2025-08">Aug 2025</time></p>
+          <h3>Software Engineer</h3>
+          <p class="company">Airstage</p>
+          <p>Developed and published mobile apps and contributed to internal tools.</p>
+          <p class="award">Outstanding Employee of the Year 2024</p>
+        </li>
+        <li>
+          <p class="date"><time datetime="2024-01">Jan 2024</time> – <time datetime="2024-04">Apr 2024</time></p>
+          <h3>Lead Support, Advanced Mobile Programming</h3>
+          <p class="company">HUFLIT</p>
+          <p>Supported the course by building example apps and APIs for students.</p>
+        </li>
+        <li>
+          <p class="date"><time datetime="2023-04">Apr 2023</time> – <time datetime="2024-01">Jan 2024</time></p>
+          <h3>Backend &amp; Mobile Developer</h3>
+          <p class="company">CHH Media</p>
+          <p>Worked on mobile interfaces, backend development, and API integration.</p>
+        </li>
+        <li>
+          <p class="date"><time datetime="2022-11">Nov 2022</time> – <time datetime="2023-01">Jan 2023</time></p>
+          <h3>Freelance Front-end Developer</h3>
+          <p class="company">JDLK Group LLC</p>
+          <p>Built responsive websites based on client and brand requirements.</p>
+        </li>
+      </ol>
+    </section>
+    <section id="education" class="shell about section">
+      <h2><span class="icon-tile icon-blue " aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-education"/></svg></span><span class="heading-text">Education</span></h2>
+      <div>
+        <p class="date"><time datetime="2020-09">Sep 2020</time> – <time datetime="2024-06">Jun 2024</time></p>
+        <h3>Information Technology</h3>
+        <p class="company">Ho Chi Minh City University of Foreign Languages and Information Technology (HUFLIT)</p>
+      </div>
+    </section>
+
+    <section id="projects" class="shell section projects">
+      <h2><span class="icon-tile icon-green " aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-project"/></svg></span><span class="heading-text">Personal projects</span></h2>
+      <article class="project">
+        <a class="project-link" href="https://pandlish.online/" aria-label="Visit the Pandlish website">
+          <div class="project-art"><img src="./pandlish.png" width="80" height="80" alt=""></div>
+          <div>
+            <h3>Pandlish</h3>
+            <p>Learn 20 languages with structured study paths, flashcards, and games.</p>
+          </div>
+          <span class="project-cta"><span class="icon-tile icon-blue " aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-web"/></svg></span><span class="project-cta-text">Visit website</span></span>
+        </a>
+      </article>
+    </section>
+  </main>
+  <footer id="contact" class="shell footer">
+    <h2><span class="icon-tile icon-pink " aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-contact"/></svg></span><span class="heading-text">Get in touch</span></h2>
+    <ul class="contact-links">
+      <li><a href="mailto:jzeno.dev@gmail.com">
+        <span class="icon-tile icon-orange" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <bdi>jzeno.dev@gmail.com</bdi>
+      </a></li>
+      <li><a href="tel:+84582072743">
+        <span class="icon-tile icon-green" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4l2 5-2 2a13 13 0 0 0 5 5l2-2 5 2v4c-9 1-17-7-16-16Z"/></svg></span>
+        <bdi>+84 582 072 743</bdi>
+      </a></li>
+      <li><a href="https://www.facebook.com/TVD.JZeno/">
+        <span class="icon-tile icon-blue" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8h3l.5-4H15V7c0-1 .5-2 2-2h2V2h-3c-3 0-5 2-5 5v2H8v4h3v8"/></svg></span>
+        Facebook
+      </a></li>
+    </ul>
+  </footer>
+  <script type="module" src="./language.js"></script>
+  <script type="module" src="./portrait.js"></script>
+  <script type="module" src="./motion.js"></script>
+  <script type="module" src="./starfield.js"></script>
+  <script type="module" src="./navigation.js"></script>
 </body>
 </html>
