@@ -800,3 +800,5 @@ body {
   .projects .project-art { grid-row: span 2; }
   .projects .project-cta { grid-column: 2; }
 }
+
+.contact-links .facebook-mark { width: 1.85rem; height: 1.85rem; stroke: none; }

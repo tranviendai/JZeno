@@ -36,7 +36,7 @@ function startStarfield() {
       drift: 3 + Math.random() * 10,
       size: 0.8 + Math.random() * 1.12,
       color: colors[index % colors.length],
-      luminance: 0.23 + Math.random() * 0.39,
+      luminance: 0.26 + Math.random() * 0.41,
     }));
     connections = [];
     for (let index = 0; index < particles.length; index++) {
@@ -92,7 +92,7 @@ function startStarfield() {
     for (const particle of particles) {
       const size = particle.size * particle.scale + particle.attraction * 0.4;
       context.fillStyle = particle.color;
-      context.globalAlpha = particle.brightness * 0.11;
+      context.globalAlpha = particle.brightness * 0.12;
       context.beginPath();
       context.arc(particle.x, particle.y, size * 2.25, 0, Math.PI * 2);
       context.fill();
