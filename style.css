@@ -21,7 +21,6 @@ h1, h2, h3 { margin: 0; line-height: 1.08; letter-spacing: -.045em; }
 .site-header { padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
 .brand { font-weight: 850; letter-spacing: .05em; }
 .brand .brand-name { white-space: nowrap; }
-.brand .brand-dot { color: var(--accent); letter-spacing: 0; }
 nav { display: flex; flex-wrap: wrap; gap: clamp(.8rem, 3vw, 2rem); }
 nav a { color: var(--muted); font-size: .9375rem; }
 
