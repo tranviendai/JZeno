@@ -760,3 +760,42 @@ body {
   .site-header { padding: .35rem .45rem .35rem .65rem; }
   #language.language-trigger { max-width: 8.7rem; }
 }
+
+/* Pandlish showcase */
+.projects .project {
+  border-color: #f68b496b;
+  background: radial-gradient(ellipse 14rem 11rem at var(--light-x, 15%) var(--light-y, 50%), #ff822c2b, transparent 95%),
+    linear-gradient(110deg, #342017, #1c1613 48%, #141414);
+  box-shadow: 0 1.1rem 3rem #0006, inset 0 1px #ffd0a227;
+}
+.projects .project:is(:hover, :focus-within) {
+  border-color: #ffac72;
+  box-shadow: 0 1.1rem 3rem #0008, 0 0 1.6rem #ff792b25;
+}
+.projects .project-art {
+  min-height: clamp(10rem, 20vw, 14rem);
+  background: radial-gradient(circle, #ec793570, transparent 69%), #211610;
+}
+.projects .project img { width: clamp(5.75rem, 11vw, 8rem); height: auto; }
+.projects .project h3 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+.projects .project p { max-width: 35ch; }
+.projects .project-cta {
+  width: fit-content;
+  padding: .52rem .85rem;
+  border-radius: .75rem;
+  background: linear-gradient(120deg, #ffc18b, #ff8b45);
+  color: #21130d;
+}
+.projects .project-cta .icon-tile {
+  width: 1.55rem;
+  height: 1.55rem;
+  border: 0;
+  color: inherit;
+  background: transparent;
+}
+.projects .project-cta .icon-tile svg { width: 85%; height: 85%; }
+@media (min-width: 48.01rem) and (max-width: 65rem) {
+  .projects .project-link { grid-template-columns: minmax(8rem, .55fr) minmax(0, 1fr); }
+  .projects .project-art { grid-row: span 2; }
+  .projects .project-cta { grid-column: 2; }
+}
