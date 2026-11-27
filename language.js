@@ -67,13 +67,30 @@ function supportedLanguage(tag) {
   return Object.hasOwn(languages, base) ? base : undefined;
 }
 
+const habicatDescriptions = {
+  vi: "Xây dựng thói quen hằng ngày cùng mèo hoạt họa, đặt lời nhắc và theo dõi tiến độ.",
+  fr: "Créez des habitudes quotidiennes avec un chat animé, des rappels et un suivi des progrès.",
+  es: "Crea hábitos diarios con un gato animado, recordatorios y seguimiento del progreso.",
+  de: "Baue tägliche Gewohnheiten mit einer animierten Katze, Erinnerungen und Fortschrittsanzeige auf.",
+  ja: "動く猫と一緒に毎日の習慣をつくり、リマインダーや進捗記録を活用できます。",
+  ko: "움직이는 고양이와 함께 매일의 습관을 만들고 알림을 설정하며 진행 상황을 확인하세요.",
+  "zh-Hans": "和动画猫咪一起养成每日习惯，设置提醒并追踪进度。",
+  "zh-Hant": "和動畫貓咪一起養成每日習慣，設定提醒並追蹤進度。",
+};
+const habicatDescription = document.querySelector('a[href="https://habicat.online/"] p');
+const habicatEnglish = habicatDescription.textContent;
+
 function applyLanguage(code) {
   const words = translations[code]?.split("|") ?? english;
   nodes.forEach((node, index) => { node.textContent = words[index]; });
   document.documentElement.lang = code;
   document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
   document.querySelector("nav").setAttribute("aria-label", words[0] + " · " + words[1] + " · " + words[2]);
-  document.querySelector(".project-link").setAttribute("aria-label", "Pandlish · " + words[20]);
+  habicatDescription.textContent = habicatDescriptions[code] ?? habicatEnglish;
+  for (const link of document.querySelectorAll(".project-link")) {
+    link.querySelector(".project-cta-text").textContent = words[20];
+    link.setAttribute("aria-label", link.querySelector("h3").textContent + " · " + words[20]);
+  }
 
   const formatter = new Intl.DateTimeFormat(code, {
     month: "short", year: "numeric", calendar: "gregory", timeZone: "UTC",
