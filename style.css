@@ -801,3 +801,42 @@ body {
 }
 
 .contact-links .facebook-mark { width: 1.85rem; height: 1.85rem; stroke: none; }
+
+.locale-menu { position: relative; min-inline-size: 0; justify-self: end; }
+.locale-menu summary {
+  cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center;
+  gap: .5rem; min-block-size: 43px; padding: .34rem .68rem;
+  color: var(--ink); border: 1px solid var(--line); border-radius: 2rem; font-size: .88rem; font-weight: 680;
+}
+.locale-menu summary::-webkit-details-marker { display: none; }
+.locale-menu summary:hover, .locale-menu[open] summary { background: var(--accent-quiet, #ff9a5126); }
+.locale-current { overflow-wrap: anywhere; }
+.locale-flag {
+  inline-size: 24px; block-size: 18px; border-radius: .2rem; flex: none;
+  object-fit: cover; box-shadow: 0 0 0 1px #2c292233;
+}
+.chevron { width: .45rem; height: .45rem; flex: none; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-.1rem) rotate(45deg); }
+.locale-menu[open] .chevron { transform: translateY(.16rem) rotate(225deg); }
+.locale-panel {
+  position: absolute; inset-block-start: calc(100% + .65rem); inset-inline-end: 0;
+  inline-size: min(460px, 100vw - 3rem); max-block-size: min(68vh, 440px); overflow-y: auto;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .22rem;
+  border: 1px solid var(--line); border-radius: .95rem; padding: .5rem;
+  background: var(--surface); color: var(--ink); box-shadow: 0 12px 32px #2c292218;
+}
+.locale-panel button {
+  min-block-size: 42px; display: flex; align-items: center; gap: .55rem; padding: .46rem .62rem;
+  border-radius: .46rem; text-decoration: none; font-size: .88rem; font-weight: 650;
+  overflow-wrap: anywhere; font-family: inherit; color: inherit; border: 0; background: transparent; cursor: pointer; text-align: start;
+}
+.locale-panel button:is(:hover, [aria-pressed="true"]) { background: var(--accent-quiet, #ff9a5126); }
+
+.locale-menu:not([open]) .locale-panel { display: none; }
+@media(max-width: 540px) {
+  .locale-panel { position: fixed; inset: 72px 12px auto; inline-size: auto; }
+  .locale-current { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-inline-size: 5rem; }
+}
+@media(prefers-reduced-motion: no-preference) {
+  .locale-menu[open] .locale-panel { animation: locale-enter 185ms ease-out both; }
+}
+@keyframes locale-enter { from { opacity: 0; translate: 0 -5px; } }

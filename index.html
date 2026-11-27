@@ -23,23 +23,15 @@
       <a href="#contact"><span class="icon-tile icon-pink" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-contact"/></svg></span><span class="nav-label">Contact</span></a>
     </nav>
     <div class="nav-controls">
-      <button id="language" class="language-trigger" type="button" aria-haspopup="dialog" aria-controls="language-dialog">
-        <span class="language-flag" aria-hidden="true">🌐</span><span class="language-current">Auto</span><svg class="language-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
-      </button>
+      <details class="locale-menu" id="language">
+        <summary><img class="locale-flag" src="./flags/gb.svg" alt=""><span class="locale-current" dir="auto">English</span><span class="chevron" aria-hidden="true"></span></summary>
+        <div class="locale-panel" role="group" aria-label="Language"></div>
+      </details>
       <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation" hidden>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
       </button>
     </div>
   </header>
-  <dialog id="language-dialog" aria-labelledby="language-title">
-    <div class="language-panel">
-      <div class="language-panel-header">
-        <h2 id="language-title">Language</h2>
-        <form method="dialog"><button class="language-close" type="submit" aria-label="Close" autofocus>×</button></form>
-      </div>
-      <div class="language-grid"></div>
-    </div>
-  </dialog>
   <main id="top">
     <div class="hero-band">
       <section class="shell hero" aria-labelledby="name">

@@ -12,58 +12,199 @@ const selectors = [
 const nodes = selectors.map((selector) => document.querySelector(selector));
 const english = nodes.map((node) => node.textContent.trim());
 const language = document.querySelector("#language");
-const dialog = document.querySelector("#language-dialog");
-const grid = dialog.querySelector(".language-grid");
-const languageTitle = dialog.querySelector("#language-title");
-const close = dialog.querySelector(".language-close");
-const activeFlag = language.querySelector(".language-flag");
-const activeName = language.querySelector(".language-current");
+const grid = language.querySelector(".locale-panel");
+const summary = language.querySelector("summary");
+const activeFlag = summary.querySelector(".locale-flag");
+const activeName = summary.querySelector(".locale-current");
 const choices = new Map();
 let currentSelection;
 const monthNodes = [...document.querySelectorAll("time")];
 
 const languages = {
-  en: ["English", "🇬🇧", "Language", "Close"], vi: ["Tiếng Việt", "🇻🇳", "Ngôn ngữ", "Đóng"],
-  es: ["Español", "🇪🇸", "Idioma", "Cerrar"], fr: ["Français", "🇫🇷", "Langue", "Fermer"],
-  de: ["Deutsch", "🇩🇪", "Sprache", "Schließen"], pt: ["Português", "🇵🇹", "Idioma", "Fechar"],
-  it: ["Italiano", "🇮🇹", "Lingua", "Chiudi"], nl: ["Nederlands", "🇳🇱", "Taal", "Sluiten"],
-  ja: ["日本語", "🇯🇵", "言語", "閉じる"], ko: ["한국어", "🇰🇷", "언어", "닫기"],
-  "zh-Hans": ["简体中文", "🇨🇳", "语言", "关闭"], "zh-Hant": ["繁體中文", "🇹🇼", "語言", "關閉"],
-  id: ["Bahasa Indonesia", "🇮🇩", "Bahasa", "Tutup"], th: ["ไทย", "🇹🇭", "ภาษา", "ปิด"],
-  hi: ["हिन्दी", "🇮🇳", "भाषा", "बंद करें"], ar: ["العربية", "🇸🇦", "اللغة", "إغلاق"],
-  tr: ["Türkçe", "🇹🇷", "Dil", "Kapat"], ru: ["Русский", "🇷🇺", "Язык", "Закрыть"],
-  pl: ["Polski", "🇵🇱", "Język", "Zamknij"], uk: ["Українська", "🇺🇦", "Мова", "Закрити"],
-  sv: ["Svenska", "🇸🇪", "Språk", "Stäng"], ms: ["Bahasa Melayu", "🇲🇾", "Bahasa", "Tutup"],
-  el: ["Ελληνικά", "🇬🇷", "Γλώσσα", "Κλείσιμο"], ro: ["Română", "🇷🇴", "Limbă", "Închide"],
+  "en": [
+    "English",
+    "gb",
+    "Language"
+  ],
+  "vi": [
+    "Tiếng Việt",
+    "vn",
+    "Ngôn ngữ"
+  ],
+  "zh-Hans": [
+    "简体中文",
+    "cn",
+    "语言"
+  ],
+  "zh-Hant": [
+    "繁體中文",
+    "tw",
+    "語言"
+  ],
+  "ja": [
+    "日本語",
+    "jp",
+    "言語"
+  ],
+  "ko": [
+    "한국어",
+    "kr",
+    "언어"
+  ],
+  "de": [
+    "Deutsch",
+    "de",
+    "Sprache"
+  ],
+  "fr": [
+    "Français",
+    "fr",
+    "Langue"
+  ],
+  "es": [
+    "Español",
+    "es",
+    "Idioma"
+  ],
+  "pt": [
+    "Português",
+    "br",
+    "Idioma"
+  ],
+  "hi": [
+    "हिन्दी",
+    "in",
+    "भाषा"
+  ],
+  "id": [
+    "Bahasa Indonesia",
+    "id",
+    "Bahasa"
+  ],
+  "ar": [
+    "العربية",
+    "sa",
+    "اللغة"
+  ],
+  "ru": [
+    "Русский",
+    "ru",
+    "Язык"
+  ],
+  "it": [
+    "Italiano",
+    "it",
+    "Lingua"
+  ],
+  "th": [
+    "ไทย",
+    "th",
+    "ภาษา"
+  ],
+  "tr": [
+    "Türkçe",
+    "tr",
+    "Dil"
+  ],
+  "nl": [
+    "Nederlands",
+    "nl",
+    "Taal"
+  ],
+  "sv": [
+    "Svenska",
+    "se",
+    "Språk"
+  ],
+  "pl": [
+    "Polski",
+    "pl",
+    "Język"
+  ],
+  "ms": [
+    "Bahasa Melayu",
+    "my",
+    "Bahasa"
+  ],
+  "uk": [
+    "Українська",
+    "ua",
+    "Мова"
+  ],
+  "ro": [
+    "Română",
+    "ro",
+    "Limbă"
+  ],
+  "bn": [
+    "বাংলা",
+    "bd",
+    "ভাষা"
+  ],
+  "fil": [
+    "Filipino",
+    "ph",
+    "Wika"
+  ],
+  "he": [
+    "עברית",
+    "il",
+    "שפה"
+  ],
+  "no": [
+    "Norsk bokmål",
+    "no",
+    "Språk"
+  ],
+  "da": [
+    "Dansk",
+    "dk",
+    "Sprog"
+  ],
+  "fi": [
+    "Suomi",
+    "fi",
+    "Kieli"
+  ],
+  "cs": [
+    "Čeština",
+    "cz",
+    "Jazyk"
+  ]
 };
-
-for (const [code, [name, flag]] of Object.entries({ auto: ["Auto", "🌐"], ...languages })) {
+const newNavigation = {"bn": ["অভিজ্ঞতা", "প্রকল্প", "যোগাযোগ"], "fil": ["Karanasan", "Mga proyekto", "Makipag-ugnayan"], "he": ["ניסיון", "פרויקטים", "יצירת קשר"], "no": ["Erfaring", "Prosjekter", "Kontakt"], "da": ["Erfaring", "Projekter", "Kontakt"], "fi": ["Kokemus", "Projektit", "Yhteystiedot"], "cs": ["Zkušenosti", "Projekty", "Kontakt"]};
+for (const [code, [name, flag]] of Object.entries(languages)) {
   const button = document.createElement("button");
   button.type = "button";
-  button.className = "language-choice";
-  if (code !== "auto") button.lang = code;
-  const icon = document.createElement("span");
-  icon.className = "language-flag";
-  icon.setAttribute("aria-hidden", "true");
-  icon.textContent = flag;
+  button.lang = code;
+  const icon = document.createElement("img");
+  icon.className = "locale-flag";
+  icon.src = `./flags/${flag}.svg`;
+  icon.alt = "";
   button.append(icon, name);
   button.addEventListener("click", () => {
     applySelection(code);
     saveSelection(code);
-    dialog.close();
+    language.open = false;
+    summary.focus();
   });
   grid.append(button);
   choices.set(code, button);
 }
-
-language.addEventListener("click", () => dialog.showModal());
-dialog.addEventListener("click", (event) => {
-  if (event.target === dialog) dialog.close();
+document.addEventListener("pointerdown", (event) => {
+  if (!language.contains(event.target)) language.open = false;
+});
+language.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && language.open) {
+    language.open = false;
+    summary.focus();
+  }
 });
 
 function supportedLanguage(tag) {
   const [base, region] = tag.toLowerCase().split("-");
   if (base === "zh") return /hant|^(tw|hk|mo)$/.test(region ?? "") ? "zh-Hant" : "zh-Hans";
+  if (base === "nb" || base === "nn") return "no";
   return Object.hasOwn(languages, base) ? base : undefined;
 }
 
@@ -81,10 +222,10 @@ const habicatDescription = document.querySelector('a[href="https://habicat.onlin
 const habicatEnglish = habicatDescription.textContent;
 
 function applyLanguage(code) {
-  const words = translations[code]?.split("|") ?? english;
+  const words = translations[code]?.split("|") ?? [...(newNavigation[code] ?? english.slice(0, 3)), ...english.slice(3)];
   nodes.forEach((node, index) => { node.textContent = words[index]; });
   document.documentElement.lang = code;
-  document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
+  document.documentElement.dir = (code === "ar" || code === "he") ? "rtl" : "ltr";
   document.querySelector("nav").setAttribute("aria-label", words[0] + " · " + words[1] + " · " + words[2]);
   habicatDescription.textContent = habicatDescriptions[code] ?? habicatEnglish;
   for (const link of document.querySelectorAll(".project-link")) {
@@ -117,14 +258,14 @@ function applySelection(selection) {
     ? navigator.languages.map(supportedLanguage).find(Boolean) ?? "en"
     : selection;
   currentSelection = selection;
-  const [name, flag, title, closeLabel] = languages[code];
-  activeFlag.textContent = flag;
-  activeName.textContent = selection === "auto" ? "Auto" : name;
-  language.setAttribute("aria-label", `${title} · ${activeName.textContent}`);
-  languageTitle.textContent = title;
-  close.setAttribute("aria-label", closeLabel);
+  const [name, flag, title] = languages[code];
+  activeFlag.src = `./flags/${flag}.svg`;
+  activeName.textContent = name;
+  activeName.lang = code;
+  summary.setAttribute("aria-label", `${title}: ${name}`);
+  grid.setAttribute("aria-label", title);
   for (const [choice, button] of choices) {
-    button.setAttribute("aria-pressed", String(choice === selection));
+    button.setAttribute("aria-pressed", String(choice === code));
   }
   applyLanguage(code);
 }
